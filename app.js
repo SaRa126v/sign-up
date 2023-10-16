@@ -82,25 +82,25 @@ inputs.forEach((input) => {
 // show error if either of them is not checked
 
 submit.addEventListener("click", (e) => {
-e.preventDefault();
+
+  e.preventDefault();
 
   // the selected account type
   const checkedAccount = document.querySelector(
     'input[name="account-type"]:checked'
   );
+  
 // the checked terma & condition checkbox
   const terms = document.querySelector('input[name = "terms"]:checked');
 
   if (!checkedAccount) {
     wrong(accountMsg, accountError());
-
   } else if (!terms) {
     wrong(termsMsg, termsError());
   } else {
     accurator(accountMsg);
     accurator(termsMsg);
   }
-  // why cant i use checkedAccount.value or terms.value***********************************
 });
 
 // input validation....................................
@@ -162,7 +162,8 @@ function passwordChecker(givenValue, givenSmall) {
 function accurator(givenSmall) {
   givenSmall.textContent = "";
   // when submit btn is clicked it will proceed
-  submit.setAttribute("disabled", false);
+  // submit.disabled == false;****************************************
+
 }
 
 // wrong values.......................................
@@ -170,7 +171,7 @@ function accurator(givenSmall) {
 function wrong(givenSmall, text) {
   givenSmall.textContent = text;
   // when submit btn is clicked it will not proceed
-  submit.setAttribute("disabled", true);
+  // submit.disabled == true;
 }
 
 // 1) check if empty..................................
