@@ -61,7 +61,7 @@ body {
     margin: 1em auto;
     height: 2em;
     font-size: 1.1rem;
-    background-color: #393975;
+    background-color: #5656ed;
     border-color: white;
     min-width: 300px;
   }
@@ -74,3 +74,6 @@ body {
     color: #dfdfe2;
   }
   
+  small{
+    color: rgb(247, 110, 110);
+  }
