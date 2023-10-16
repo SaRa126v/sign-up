@@ -36,13 +36,11 @@ const strongPassRegex =
 const inputs = document.querySelectorAll("input");
 // submit button:
 const submit = document.querySelector("#submitBtn");
-// checked checkboxes:
-const checkedAccount = document.querySelector(
-  'input[name="account-type"]:checked'
-);
-const terms = document.querySelector('input[name = "terms"]:checked');
+
 // checkboxes & the whole form small tag:
-const formError = document.querySelector("#formError");
+const formMsg = document.querySelector("#formMsg");
+const accountMsg = document.querySelector("#accountMsg");
+const termsMsg = document.querySelector("#termsMsg");
 
 // when user goes to the next input, the previous input should be checked........................................
 
@@ -84,12 +82,23 @@ inputs.forEach((input) => {
 // show error if either of them is not checked
 
 submit.addEventListener("click", (e) => {
+e.preventDefault();
+
+  // the selected account type
+  const checkedAccount = document.querySelector(
+    'input[name="account-type"]:checked'
+  );
+// the checked terma & condition checkbox
+  const terms = document.querySelector('input[name = "terms"]:checked');
+
   if (!checkedAccount) {
-    e.preventDefault();
-    formError.textContent = accountError();
+    wrong(accountMsg, accountError());
+
   } else if (!terms) {
-    e.preventDefault();
-    formError.textContent = termsError();
+    wrong(termsMsg, termsError());
+  } else {
+    accurator(accountMsg);
+    accurator(termsMsg);
   }
   // why cant i use checkedAccount.value or terms.value***********************************
 });
