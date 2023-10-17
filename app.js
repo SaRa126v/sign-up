@@ -76,33 +76,6 @@ inputs.forEach((input) => {
   });
 });
 
-// checkbox validation..............................
-
-// when submit button is clicked check if terms & account type are checked by the user
-// show error if either of them is not checked
-
-submit.addEventListener("click", (e) => {
-
-  e.preventDefault();
-
-  // the selected account type
-  const checkedAccount = document.querySelector(
-    'input[name="account-type"]:checked'
-  );
-  
-// the checked terma & condition checkbox
-  const terms = document.querySelector('input[name = "terms"]:checked');
-
-  if (!checkedAccount) {
-    wrong(accountMsg, accountError());
-  } else if (!terms) {
-    wrong(termsMsg, termsError());
-  } else {
-    accurator(accountMsg);
-    accurator(termsMsg);
-  }
-});
-
 // input validation....................................
 
 // check name input
@@ -128,7 +101,7 @@ function lastNameChecker(givenValue, givenSmall) {
     wrong(givenSmall, regexError(letterRegex));
   } else {
     accurator(givenSmall);
-  }
+      }
 }
 
 // check email input..................................
@@ -157,21 +130,41 @@ function passwordChecker(givenValue, givenSmall) {
   }
 }
 
+// check checkboxes after click.......................
+
+function checkboxChecker(checkedAccount, terms) {
+  if (!checkedAccount) {
+    wrong(accountMsg, accountError());
+  } else if (!terms) {
+    accurator(accountMsg);
+    wrong(termsMsg, termsError());
+  } else {
+    accurator(termsMsg);
+  }
+}
+
 // accurate values...................................
 
 function accurator(givenSmall) {
   givenSmall.textContent = "";
-  // when submit btn is clicked it will proceed
-  // submit.disabled == false;****************************************
-
 }
 
 // wrong values.......................................
 
 function wrong(givenSmall, text) {
   givenSmall.textContent = text;
-  // when submit btn is clicked it will not proceed
-  // submit.disabled == true;
+}
+
+// when submit btn is clicked it will proceed.........
+// ******************************
+function btnDisabalor() {
+  submit.setAttribute("disabled", "disabled");
+}
+
+// when submit btn is clicked it will not proceed.....
+// ******************************
+function btnEnsabalor() {
+  submit.removeAttribute("disabled");
 }
 
 // 1) check if empty..................................
@@ -210,3 +203,24 @@ function accountError() {
 function termsError() {
   return "Please check the terms and conditions box to proceed!";
 }
+
+
+// final validation..............................
+
+// when submit button is clicked check if terms & account type are checked by the user
+// show error if either of them is not checked
+
+submit.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  // the selected account type
+  const checkedAccount = document.querySelector(
+    'input[name="account-type"]:checked'
+  );
+
+  // the checked terma & condition checkbox
+  const terms = document.querySelector('input[name = "terms"]:checked');
+
+  checkboxChecker(checkedAccount, terms);
+
+});
